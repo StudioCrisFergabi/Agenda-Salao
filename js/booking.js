@@ -16,6 +16,7 @@ const WHATSAPP_NUMBER = '5511965114520';
 const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Olá! Gostaria de mais informações sobre o Studio Cris Fergabi.')}`;
 document.getElementById('whatsFab').href = waHref;
 document.getElementById('whatsLink').href = waHref;
+document.getElementById('serviceHelpLink').href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Olá! Tenho uma dúvida sobre o comprimento do cabelo ou os serviços do Studio Cris Fergabi.')}`;
 
 // ---------- toast ----------
 function showToast(msg) {
@@ -39,25 +40,16 @@ async function renderServicesList() {
     list.innerHTML = `<div class="admin-empty">Não foi possível carregar os serviços agora. Recarregue a página em instantes.</div>`;
     return;
   }
-  list.innerHTML = CACHED_SERVICES.map(s => {
-    const minPrice = Math.min(...Object.values(s.prices));
-    const maxPrice = Math.max(...Object.values(s.prices));
-    const minDur = Math.min(...Object.values(s.durations));
-    return `
+  list.innerHTML = CACHED_SERVICES.map(s => `
       <div class="service-card">
-        <div>
-          <h3>${s.name}</h3>
-          <div class="meta">
-            <span>${currency(minPrice)} – ${currency(maxPrice)}</span>
-            <span>a partir de ${minDur} min</span>
-          </div>
+        <h3>${s.name}</h3>
+        <div class="service-card__prices">
+          <div class="len-price"><span class="len-label">Curto</span><strong>${currency(s.prices.curto)}</strong></div>
+          <div class="len-price"><span class="len-label">Médio</span><strong>${currency(s.prices.medio)}</strong></div>
+          <div class="len-price"><span class="len-label">Longo</span><strong>${currency(s.prices.longo)}</strong></div>
         </div>
-        <div>
-          <div class="price">${currency(minPrice)}<small>preço a partir de</small></div>
-          <button data-service="${s.id}" class="pick-service">Agendar</button>
-        </div>
-      </div>`;
-  }).join('');
+        <button data-service="${s.id}" class="pick-service">Agendar</button>
+      </div>`).join('');
 
   list.querySelectorAll('.pick-service').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -75,11 +67,10 @@ function renderServiceChoices() {
   const box = document.getElementById('serviceChoices');
   box.innerHTML = CACHED_SERVICES.map(s => {
     const price = s.prices[state.length];
-    const duration = s.durations[state.length];
     return `
     <button class="choice" data-service="${s.id}">
       <strong>${s.name}</strong>
-      <span>${currency(price)} · ${duration} min</span>
+      <span>${currency(price)}</span>
     </button>`;
   }).join('');
   box.querySelectorAll('.choice').forEach(btn => {

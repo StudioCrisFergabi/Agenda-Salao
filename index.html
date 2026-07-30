@@ -137,9 +137,9 @@
       <div class="step-panel active" id="panel-1">
         <h3 class="step-title">Qual o comprimento do seu cabelo?</h3>
         <div class="length-grid" id="lengthChoices">
-          <button class="choice" data-length="curto"><strong>Curto</strong><span>Menor tempo e valor</span></button>
-          <button class="choice" data-length="medio"><strong>Médio</strong><span>Tempo e valor intermediários</span></button>
-          <button class="choice" data-length="longo"><strong>Longo</strong><span>Maior tempo e valor</span></button>
+          <button class="choice" data-length="curto"><strong>Curto</strong></button>
+          <button class="choice" data-length="medio"><strong>Médio</strong></button>
+          <button class="choice" data-length="longo"><strong>Longo</strong></button>
         </div>
         <div class="step-nav"><span></span><button class="btn btn-primary" id="toStep2" disabled>Continuar</button></div>
       </div>
@@ -148,6 +148,10 @@
       <div class="step-panel" id="panel-2">
         <h3 class="step-title">Qual serviço você deseja?</h3>
         <div class="choice-grid" id="serviceChoices"></div>
+        <a href="#" id="serviceHelpLink" class="service-help" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1.1 2.8 1.2 3c.1.2 2.1 3.2 5.1 4.4.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.2L2 22l4.9-1.3C8.4 21.5 10.2 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18c-1.7 0-3.3-.5-4.7-1.3l-.3-.2-3 .8.8-2.9-.2-.3C3.7 14.7 3.2 13.4 3.2 12c0-4.8 3.9-8.7 8.8-8.7s8.7 3.9 8.7 8.7-3.9 8.8-8.7 8.8z"/></svg>
+          <span>Tem dúvida com o comprimento do cabelo ou com algum dos serviços? Clique aqui e fale com a gente no WhatsApp.</span>
+        </a>
         <div class="step-nav"><button class="btn btn-ghost" data-back="1">Voltar</button><button class="btn btn-primary" id="toStep3" disabled>Continuar</button></div>
       </div>
 
