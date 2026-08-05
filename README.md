@@ -63,10 +63,19 @@ Depois disso, abra `admin.html`, faça login, e cadastre/confira os serviços
 3. Confirme em **Firebase Console → Authentication → Users** que o e-mail
    aparece na lista (é ali que a senha de verdade fica, e só lá pode ser
    trocada).
-4. Confira se não sobrou espaço em branco antes/depois do e-mail ou da senha
+4. **Autorize o domínio do site**: vá em **Firebase Console → Authentication
+   → Settings → Authorized domains** e confira se o endereço do seu GitHub
+   Pages (algo como `seu-usuario.github.io`) está na lista. Se não estiver,
+   clique em **Add domain** e adicione. Sem isso, o login pode falhar
+   silenciosamente mesmo com e-mail/senha certos.
+5. Confira se não sobrou espaço em branco antes/depois do e-mail ou da senha
    ao digitar.
-5. Se nada disso resolver, abra o site publicado, pressione F12 (ferramentas
-   do desenvolvedor) → aba **Console**, tente logar de novo, e me manda a
+6. A tela de login agora mostra o motivo exato do erro (por exemplo "domínio
+   não autorizado" ou "senha incorreta") assim que ele acontece — leia a
+   mensagem que aparecer embaixo do botão Entrar.
+7. Se ainda assim não resolver, abra o site publicado, pressione F12
+   (ferramentas do desenvolvedor) → aba **Console**, tente logar de novo, e
+   me manda a
    mensagem de erro que aparecer lá — ela diz exatamon que está errado.
 
 ## Como cadastrar serviços, preços e horários

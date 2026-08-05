@@ -18,6 +18,10 @@ let dashboardInited = false;
 
 async function boot() {
   await window.STORE.ready;
+  if (!window.FIREBASE_AUTH) {
+    loginError.textContent = 'Não foi possível conectar ao Firebase. Verifique sua internet e recarregue a página.';
+    return;
+  }
   onAuthStateChanged(window.FIREBASE_AUTH, (user) => {
     if (user) {
       loginScreen.hidden = true; dashboard.hidden = false;
@@ -25,6 +29,8 @@ async function boot() {
     } else {
       loginScreen.hidden = false; dashboard.hidden = true;
     }
+  }, (err) => {
+    loginError.textContent = 'Erro de conexão com o Firebase: ' + err.message;
   });
 }
 boot();
@@ -43,7 +49,17 @@ async function doLogin() {
   try {
     await signInWithEmailAndPassword(window.FIREBASE_AUTH, email, pass);
   } catch (err) {
-    loginError.textContent = 'E-mail ou senha incorretos.';
+    console.error(err);
+    const code = err.code || '';
+    if (code === 'auth/invalid-credential' || code === 'auth/wrong-password' || code === 'auth/user-not-found') {
+      loginError.textContent = 'E-mail ou senha incorretos.';
+    } else if (code === 'auth/unauthorized-domain') {
+      loginError.textContent = 'Este site ainda não está autorizado no Firebase (Authentication → Settings → Authorized domains).';
+    } else if (code === 'auth/too-many-requests') {
+      loginError.textContent = 'Muitas tentativas seguidas. Aguarde um pouco e tente de novo.';
+    } else {
+      loginError.textContent = `Erro ao entrar (${code || err.message}). Veja o console (F12) para detalhes.`;
+    }
   } finally {
     btn.disabled = false; btn.textContent = 'Entrar';
   }
