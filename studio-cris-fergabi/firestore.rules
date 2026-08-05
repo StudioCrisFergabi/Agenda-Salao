@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Serviços: qualquer pessoa pode ver, só a proprietária logada pode editar
+    match /services/{serviceId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // Configurações (horário de funcionamento, datas bloqueadas)
+    match /settings/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // Galeria de fotos: qualquer pessoa vê, só a proprietária logada
+    // adiciona ou remove fotos.
+    match /gallery/{photoId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // Agendamentos: qualquer pessoa pode criar um agendamento (é o que
+    // permite o site funcionar sem login para a cliente) e ver a agenda
+    // (necessário para calcular horários livres). Só a proprietária
+    // logada pode editar ou cancelar.
+    match /bookings/{bookingId} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasAll(
+        ['serviceId','date','startTime','endTime','name','whatsapp']
+      );
+      allow update, delete: if request.auth != null;
+    }
+  }
+}

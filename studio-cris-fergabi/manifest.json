@@ -1,0 +1,13 @@
+{
+  "name": "Studio Cris Fergabi",
+  "short_name": "Cris Fergabi",
+  "description": "Salão de beleza Studio Cris Fergabi — agendamento online.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fffaf7",
+  "theme_color": "#2b1620",
+  "icons": [
+    { "src": "assets/logo.jpg", "sizes": "1024x1024", "type": "image/jpeg", "purpose": "any" }
+  ]
+}
